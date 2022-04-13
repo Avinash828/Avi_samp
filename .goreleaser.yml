@@ -1,7 +1,4 @@
 project_name: eg
-before:
-  hooks:
-    - make prepare
 builds:
   - id: "eg"
     goos:
