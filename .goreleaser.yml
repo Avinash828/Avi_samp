@@ -27,21 +27,6 @@ dockers:
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
       - "--label=org.opencontainers.image.version={{.Version}}"
 
-      
-  - use: buildx
-    goos: linux
-    goarch: 386
-    dockerfile: Dockerfile
-    image_templates:
-      - "avinashyadavpuresoftware/eg:latest-386"
-      - "avinashyadavpuresoftware/eg:{{ .Version }}-386"
-    build_flag_templates:
-      - "--platform=linux/386"
-      - "--pull"
-      - "--label=org.opencontainers.image.created={{.Date}}"
-      - "--label=org.opencontainers.image.name={{.ProjectName}}"
-      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-      - "--label=org.opencontainers.image.version={{.Version}}"
 
   - use: buildx
     goos: linux
