@@ -65,7 +65,7 @@ docker_manifests:
       - avinashyadavpuresoftware/eg:{{ .Version }}-amd64
       - avinashyadavpuresoftware/eg:{{ .Version }}-arm64v8
       - avinashyadavpuresoftware/eg:{{ .Version }}-386
-  - name_template: avinashyadavpuresoftware/event-generator:latest
+  - name_template: avinashyadavpuresoftware/eg:latest
     image_templates:
       - avinashyadavpuresoftware/eg:latest-amd64
       - avinashyadavpuresoftware/eg:latest-arm64v8
