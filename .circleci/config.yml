@@ -25,7 +25,7 @@ jobs:
       - run:
           name: Prepare env
           command: |
-            echo Avinash@8794 | docker login -u avinashyadavpuresoft --password-stdin
+            echo Avinash@8794 | docker login -u avinashyadavpuresoftware --password-stdin
       - run: 
           name: Go releaser
           no_output_timeout: 50m
