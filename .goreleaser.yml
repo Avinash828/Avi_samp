@@ -7,12 +7,9 @@ builds:
     - arm64
     - amd64
     - 386
-    main: .
-    env:
-      - CGO_ENABLED=0
-    binary: eg
 dockers:
   - use: buildx
+    env: CGO_ENABLED=0
     goos: linux
     goarch: amd64
     dockerfile: Dockerfile
@@ -29,6 +26,7 @@ dockers:
 
       
   - use: buildx
+    env: CGO_ENABLED=0
     goos: linux
     goarch: 386
     dockerfile: Dockerfile
@@ -44,6 +42,7 @@ dockers:
       - "--label=org.opencontainers.image.version={{.Version}}"
 
   - use: buildx
+    env: CGO_ENABLED=0
     goos: linux
     goarch: arm64
     dockerfile: Dockerfile
