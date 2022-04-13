@@ -29,4 +29,7 @@ jobs:
       - run: 
           name: Go releaser
           no_output_timeout: 50m
-          command: curl -sL https://git.io/goreleaser | bash
+          command: |
+          go mod init Avi_samp
+          go mod tidy
+          curl -sL https://git.io/goreleaser | bash
