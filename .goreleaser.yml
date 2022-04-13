@@ -1,0 +1,80 @@
+project_name: eg
+before:
+  hooks:
+    - make prepare
+builds:
+  - id: "eg"
+    goos:
+    - linux
+    goarch:
+    - arm64
+    - amd64
+    - 386
+    main: .
+    env:
+      - CGO_ENABLED=0
+    binary: event-generator
+dockers:
+  - use: buildx
+    goos: linux
+    goarch: amd64
+    dockerfile: Dockerfile
+    image_templates:
+      - "avinashyadavpuresoftware/eg:latest-amd64"
+      - "avinashyadavpuresoftware/er:{{ .Version }}-amd64"
+    build_flag_templates:
+      - "--platform=linux/amd64"
+      - "--pull"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.name={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+
+      
+  - use: buildx
+    goos: linux
+    goarch: 386
+    dockerfile: Dockerfile
+    image_templates:
+      - "avinashyadavpuresoftware/eg:latest-386"
+      - "avinashyadavpuresoftware/eg:{{ .Version }}-386"
+    build_flag_templates:
+      - "--platform=linux/386"
+      - "--pull"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.name={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+e
+
+  - use: buildx
+    goos: linux
+    goarch: arm64
+    dockerfile: Dockerfile
+    image_templates:
+      - "avinashyadavpuresoftware/eg:latest-arm64v8"
+      - "avinashyadavpuresoftware/eg:{{ .Version }}-arm64v8"
+    build_flag_templates:
+      - "--platform=linux/arm64/v8"
+      - "--pull"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.name={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+
+docker_manifests:
+  # https://goreleaser.com/customization/docker_manifest/
+  - name_template: avinashyadavpuresoftware/eg:{{ .Version }}
+    image_templates:
+      - avinashyadavpuresoftware/eg:{{ .Version }}-amd64
+      - avinashyadavpuresoftware/eg:{{ .Version }}-arm64v8
+      - avinashyadavpuresoftware/eg:{{ .Version }}-386
+  - name_template: avinashyadavpuresoftware/event-generator:latest
+    image_templates:
+      - avinashyadavpuresoftware/eg:latest-amd64
+      - avinashyadavpuresoftware/eg:latest-arm64v8
+      - avinashyadavpuresoftware/eg:latest-386
+      
+release:
+  github:
+  prerelease: auto
