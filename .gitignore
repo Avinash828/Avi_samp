@@ -1,0 +1,4 @@
+eg
+evtgen-docgen
+dist/
+events/k8saudit/yaml/bundle.go
